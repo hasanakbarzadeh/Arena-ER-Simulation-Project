@@ -1,0 +1,131 @@
+PROJECT,      "Unnamed Project","ENCS",,,No,Yes,Yes,Yes,No,No,No,No,No,No;
+
+ATTRIBUTES:   Patient_Proiority,DATATYPE(Real):
+              Hospitalization_Time_hour,DATATYPE(Real):
+              Proiority,DATATYPE(Real):
+              a_ExitTime,DATATYPE(Real);
+
+FILES:        HospitalizationTimeWalkIns,"U:\Downloads\Project\Hospitalization_Time_WalkIns.csv",Sequential,"%f,",Dispose,,Hold:
+              HospitalizationTimeAmbulance,"U:\Downloads\Project\Hospitalization_Time_Ambulance.csv",Sequential,"%f,",Dispose,,
+              Hold;
+
+VARIABLES:    Stabiization Process.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Nursing Care.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Blood Test.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              PreTraige.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Doctor Diagnosis.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Another Hospital.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              PreTraige.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Transferred to Another Hospital.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              Transferred to Another Hospital.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              Triage.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Separating to count for Deterioration.NumberOut Dup,CLEAR(Statistics),CATEGORY("Exclude"):
+              Blood Test.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Separating to count for Deterioration.NumberOut Orig,CLEAR(Statistics),CATEGORY("Exclude"):
+              Triage.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              AnotherDeptBed,CLEAR(System),CATEGORY("User Specified-User Specified"),DATATYPE(Real):
+              Deterioration Stabilization.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Deterioration Stabilization.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              WaitingRoom.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              WaitingRoom.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Triage.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Stabiization Process.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              P2 Treatment.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Stabiization Process.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              X_ray.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Urgent Care go Home.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Volume_multiplier(5),CLEAR(System),CATEGORY("User Specified-User Specified"),DATATYPE(Real),1:
+              Nursing Care.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Deterioration Stabilization.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Blood Test.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              PreTraige.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              PateintPrioirity(5),CLEAR(System),CATEGORY("User Specified-User Specified"),DATATYPE(Real),0,1,2,3,4:
+              Non_Urgent Discharged Home.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              If Hospitalization Time is not less than 24 hours?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              If Hospitalization Time is not less than 24 hours?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is Additional Blood Test Required?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              Doctor Diagnosis.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Ambulance.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Clone Remove P1.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Doctor Diagnosis.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is X_ray Needed After Blood Test?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              P2 Treatment.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              the Situation gets Detiriorated?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              X_ray is Needed?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is X_ray Needed After Blood Test?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              the Situation gets Detiriorated?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              Patient_left(100000),CLEAR(System),CATEGORY("User Specified-User Specified"),DATATYPE(Real):
+              X_ray is Needed?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              Examination.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              P2 Treatment.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Examination.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Examination.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              WalkIns.NumberOut,CLEAR(Statistics),CATEGORY("Exclude"):
+              Nursing Care.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is Additional Blood Test Required?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              WaitingRoom.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              X_ray.NumberIn,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is Time Up?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              Not Need Nursing Care again P1?.NumberOut False,CLEAR(Statistics),CATEGORY("Exclude"):
+              X_ray.WIP,CLEAR(System),CATEGORY("Exclude-Exclude"),DATATYPE(Real):
+              Not Need Nursing Care again P1?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude"):
+              Is Time Up?.NumberOut True,CLEAR(Statistics),CATEGORY("Exclude");
+
+QUEUES:       P2 Treatment.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Blood Test.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Seizing Exam Room.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Deterioration Stabilization.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Stabiization Process.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Doctor Diagnosis.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Examination.Queue,FIFO,,AUTOSTATS(Yes,,):
+              Nursing Care.Queue,FIFO,,AUTOSTATS(Yes,,):
+              WaitingRoom.Queue,LVF(Proiority),,AUTOSTATS(Yes,,):
+              Triage.Queue,FIFO,,AUTOSTATS(Yes,,):
+              HospitalBed.Queue,LVF(Proiority),,AUTOSTATS(Yes,,):
+              PreTraige.Queue,FIFO,,AUTOSTATS(Yes,,):
+              X_ray.Queue,FIFO,,AUTOSTATS(Yes,,);
+
+PICTURES:     Picture.Person:
+              Picture.Green Ball:
+              Picture.Red Ball:
+              Picture.Yellow Ball:
+              Picture.Report:
+              Picture.Box:
+              Picture.Blue Ball;
+
+RESOURCES:    Paramedic,Capacity(Infinite),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              Chair,Capacity(35),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              Nurse,Capacity(3),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              Doctor,Capacity(2),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              X_rayMachine,Capacity(1),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              Exam Room,Capacity(1),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,):
+              Bed,Capacity(Infinite),,,COST(0.0,0.0,0.0),CATEGORY(Resources),,AUTOSTATS(Yes,,);
+
+OUTPUTS:      DAVG(Nurse.NumberBusy),"U:\Downloads\Project\AvrageNurseBusy1.dat",Average Nurse Busy,DATABASE(,"Output",
+              "User Specified","Average Nurse Busy"):
+              DAVG(WaitingRoom.Queue.NumberInQueue),"U:\Downloads\Project\AvgNumberinWaitingRoomQueue.dat",Waiting Room Queue,
+              DATABASE(,"Output","User Specified","Waiting Room Queue"):
+              DAVG(Doctor.NumberBusy),"U:\Downloads\Project\AVGDoctorBusy1.dat",Average Doctor Busy,DATABASE(,"Output",
+              "User Specified","Average Doctor Busy"):
+              
+              DAVG(Deterioration Stabilization.Queue.NumberInQueue) +  DAVG(Stabiization Process.Queue.NumberInQueue) + DAVG(P2 Treatment.Queue.NumberInQueue),
+              "U:\Downloads\Project\DoctorQueue.dat",DoctorQueue,DATABASE(,"Output","User Specified","DoctorQueue"):
+              DAVG(Chair.NumberBusy),"U:\Downloads\Project\AVGChairBusy1.dat",Average Chair Busy,DATABASE(,"Output",
+              "User Specified","Average Chair Busy"):
+              DAVG(Nursing Care.Queue.NumberInQueue)  + DAVG(Blood Test.Queue.NumberInQueue),
+              "U:\Downloads\Project\NursingCareQueue.dat",Nursing Queue,DATABASE(,"Output","User Specified","Nursing Queue");
+
+REPLICATE,    5,,DaysToBaseTime(15),Yes,Yes,,,,24,Days,No,No,,,Yes,No;
+
+ARRIVALS:     HospitalizationTimeAmbulance_Arrvl,Block(HospitalizationTimeAmbulance_RH),First,1 * (NREP==1):
+              HospitalizationTimeWalkIns_Arrvl,Block(HospitalizationTimeWalkIns_RH),First,1 * (NREP==1);
+
+ENTITIES:     P5_Patient,Picture.Person,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,):
+              P4_Patient,Picture.Yellow Ball,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,):
+              P3_Patient,Picture.Red Ball,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,):
+              P2_Patient,Picture.Green Ball,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,):
+              P1_Patient,Picture.Blue Ball,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,):
+              Patient,Picture.Report,0.0,0.0,0.0,0.0,0.0,0.0,AUTOSTATS(Yes,,);
+
+SETS:         PatientTypeSet,,,P1_Patient,P2_Patient,P3_Patient,P4_Patient,P5_Patient;
+
